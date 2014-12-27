@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body onkeydown="KeyDown(event)">
+        <div style="width:400px;height:190px;border:2px solid green;" id="names"> 
+            <script>
+                <!--生成抽奖者 -->
+                for (var i = 1; i <= 40; i++) {
+                    document.write("<div style='width:36px;height:36px;border:2px solid white;background:#ccc;text-align:center;float:left;padding-top:7px;'>" + i + "</div>");
+                }
+            </script>
+        </div>
+
+        <button type="button" id="Enter">Enter (Lottery Start)</button>
+        <button type="button" id="Space">Space (Lottery End)</button>
+
+        <script>
+            <!--定义全局变量 -->
+            var names = document.getElementById("names").getElementsByTagName("div");<!--抽奖者数组 -->
+            var lot;<!--用于setInterval,clearInterval函数，控制Lotter函数的停止-->
+            var preNum = 0;<!--previous number -->
+            var ranNum = 0;<!--random number -->
+           
+            <!--Enter或Space键按下时调用函数 -->
+            function KeyDown(evt) {
+                if (evt.keyCode == 13) {
+                    document.getElementById("Enter").focus();
+                    startLottery();
+                }
+                if (evt.keyCode == 32) {
+                    document.getElementById("Space").focus();
+                    stopLottery();
+                }
+            }
+
+            <!--抽奖函数 -->
+            function Lottery() {
+                names[preNum].style.background="#ccc";<!--将前一个抽中者置为初始状态 -->
+                ranNum = Math.floor(Math.random() * names.length);    
+                names[ranNum].style.background="green";
+                preNum = ranNum;
+            }
+
+            function startLottery() {
+                lot = setInterval("Lottery()", 10);
+            }
+
+            function stopLottery() {
+                clearInterval(lot);
+            }
+        </script>
+    </body>
+</html>
