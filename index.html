@@ -22,7 +22,8 @@
             var lot;<!--用于setInterval,clearInterval函数，控制Lotter函数的停止-->
             var preNum = 0;<!--previous number -->
             var ranNum = 0;<!--random number -->
-           
+            var LotteryNumList = new Array();
+
             <!--Enter或Space键按下时调用函数 -->
             function KeyDown(evt) {
                 if (evt.keyCode == 13) {
@@ -38,17 +39,32 @@
             <!--抽奖函数 -->
             function Lottery() {
                 names[preNum].style.background="#ccc";<!--将前一个抽中者置为初始状态 -->
-                ranNum = Math.floor(Math.random() * names.length);    
+                ranNum = Math.floor(Math.random() * names.length);
+                while (isAinArr(ranNum, LotteryNumList)) {
+                    ranNum = Math.floor(Math.random() * names.length);
+                }
                 names[ranNum].style.background="green";
                 preNum = ranNum;
             }
 
+            <!--start lottery -->
             function startLottery() {
                 lot = setInterval("Lottery()", 10);
             }
 
+            <!--stop lottery -->
             function stopLottery() {
                 clearInterval(lot);
+                LotteryNumList.push(ranNum);
+            }
+            
+            <!--check whether a is an element of arr or not -->
+            function isAinArr(a, arr) {
+                var i = 0;
+                for (i = 0; i < arr.length; i++) {
+                    if (a == arr[i]) return true;
+                }
+                return false;
             }
         </script>
     </body>
