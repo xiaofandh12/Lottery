@@ -1,6 +1,6 @@
 # Javascript写的抽奖程序
 
-## First version
+## First version(Lottery.html)
 ### 功能
 在键盘上点击Enter键开始抽奖，点击Space停止抽奖
 
@@ -10,4 +10,3 @@
 - 引入jQuery的使用
 - 解决中文不显示的问题
 - 使用转盘显示抽奖过程
-- 被抽过的号码不会再被抽到
